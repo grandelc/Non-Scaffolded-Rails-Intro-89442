@@ -9,4 +9,9 @@ class PostsController < ApplicationController
   end
   # After this index action executes Rails will
   # load the app/views/posts/index.html.erb
+
+  def show
+    # params is a combination of the super global GET / POST
+    @post = Post.find(params) 
+  end # AUto load the app/views/posts/show.html.erb 
 end

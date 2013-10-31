@@ -9,8 +9,17 @@ NonScaffoldedRails::Application.routes.draw do
   match 'contact_us' => 'info#contact', :as => 'contact'
   # URL /contact will map to contact action of the info controller.
   
-  match 'blog' => 'posts#index', :as => 'posts'
+  match 'posts' => 'posts#index', :as => 'posts', :via => :get
   # URL /posts will map to the index action of the posts controller.
+
+  # Rails work very closely with the way HTTP was intended to be 
+  # HTTP was originally used to retrieve resources 
+  match 'posts/:id' => 'posts#show', :as => 'post', :via => :get 
+  
+  match 'posts/new' => 'posts#new', :a => 'new_post', :via => :get 
+
+  match 'posts' => 'posts#create', :a => 'create_post', :via => :post 
+  # only execute the create action if we POST to /posts 
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
