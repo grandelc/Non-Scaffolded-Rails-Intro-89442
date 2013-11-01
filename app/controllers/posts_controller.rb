@@ -1,5 +1,9 @@
 class PostsController < ApplicationController
   
+  # ************** ALL THE CODE ABOVE IS THE SAME THING AS WRITING:
+  # resources :posts
+  # ************** 
+  
   # Route defined for this index action
   # the URL being /posts
   def index
@@ -39,4 +43,20 @@ class PostsController < ApplicationController
     @post.destroy
     redirect_to :action => :index
   end # This action has no associated view. It always redirects 
+
+  def edit
+    @post = Post.find(params[:id]) 
+  end # Load app/view/posts/edit.html.erb
+
+  def update
+    @post = Post.find(params[:id])
+    @post.update_attributes(params[:post])
+
+    if @post.save 
+      redirect_to :action => :index
+    else
+      render :action => :edit 
+    end 
+
+  end 
 end
